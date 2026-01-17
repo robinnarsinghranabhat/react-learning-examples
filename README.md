@@ -8,7 +8,10 @@ Server provided JS files can do a bunch of stuffs.
 But we generally use the to update the `DOM`. Example : 
 Example : document.getElementByID('body').style.background = "red"
 ```
-React is infact a JS library with pre-packaged functionalities, that claims to make updating the DOM more managable than done above. 
+React is library (just a bunch of of JS functions ) that wants us to write UI in a certain way (like a Design pattern). Folks say this particular way of designing UI helps us tame complexity better than
+what we are doing above.
+
+Challenge 3 shown here is a goldmine : `https://react.dev/learn/reacting-to-input-with-state`.
 
 ## The Design of React ? 
 React wants us to be explicit about `variables` that changes in a component ( like characters `currently` typed in the textfield of website ). Then it provides us `method` that can be triggered to update those variables. We usually call these `setter methods` inside event handlers, when something changes. Invoking setter methods in turn causes react to
