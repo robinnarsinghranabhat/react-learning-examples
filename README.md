@@ -1,6 +1,15 @@
 # react-learning-examples
 Transitioning Vanilla HTML/JS to React
 
+## What is the Gist of Frontend JS ?
+It's pretty simple. Backend Server provides browser (client) with HTML, CSS and JS files. Browser builts the HTML Dom. Applies the CSS if present. Runs the JS script if present. And we see something.
+Server provided JS files can do a bunch of stuffs. 
+```
+But we generally use the to update the `DOM`. Example : 
+Example : document.getElementByID('body').style.background = "red"
+```
+React is infact a JS library with pre-packaged functionalities, that claims to make updating the DOM more managable than done above. 
+
 ## The Design of React ? 
 React wants us to be explicit about `variables` that changes in a component ( like characters `currently` typed in the textfield of website ). Then it provides us `method` that can be triggered to update those variables. We usually call these `setter methods` inside event handlers, when something changes. Invoking setter methods in turn causes react to
 re-run logic in that Component/Function. Meaning, UI now displays Component having the updated state variables.
