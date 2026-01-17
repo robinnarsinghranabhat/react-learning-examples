@@ -29,14 +29,25 @@ let App = function EditProfile() {
   const [lastName, setLastName] = useState("");
 
   // Don't do this .. 
+  // setFirstName won't immedietely update the firstName
+  // Suppose firstName = ""
+  // User types "a".
+  // This calls both the setters
+  // setFirstName will trigger to it's state value to "a". This shows up in input field in next render (looks immediate)
+  // setFullName will be triggered as well. fullName will update to ""+lastName. NOT "a"+lastName !
+  // And this will be show in that next render as well.
+  // react batches all renders in same handler. 
+  // Because
+  
   // const [fullName, setFullName] = useState("");
   // function handleFirstInputChange(e) {
   //   setFirstName(e.target.value);
   //   setFullName(firstName + " " + lastName);
   // }
-  // Use this Instead, since it's a derived state
-  // Everytime setters are ran, Components render
-  // So, fullName will be updated
+  
+  // Use this Instead
+  // As when setter runs, Component re-render
+  // So this piece of code below executes firstName
   const fullName = `${firstName} ${lastName}`.trim();
   function handleFirstInputChange(e) {
     setFirstName(e.target.value);
