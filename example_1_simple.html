@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LLM Access</title>
+	</head>
+    
+	<body>
+		<div class="container">
+            <div>
+                <span >First name : </span>
+                <span id="first_name_sp" class="bold-text"></span>
+                <textarea name="" id="first_name_ta"></textarea>
+                <br>
+                <span>Last name : </span>
+                <span id="last_name_sp" class="bold-text"></span>
+                <textarea name="" id="last_name_ta"></textarea>
+            </div>
+            <button class="editProfileButton">Save Profile</button>
+            <!-- Common part to Show the combined name -->
+            <div id="combined_name"></div>
+        <div>
+
+	</body>
+
+    <style>
+        .bold-text {
+          font-weight: bold; /* or a numeric value like 700 */
+         /* display: none; */
+        }
+    </style>
+
+    <script>
+        // Create some state variables and a Default UI
+        let isEditProfile = true;
+        let combined_name = "";
+        let ta_displays = "inline";
+        let sp_displays = "none";
+        let profile_type = "Save Profile";
+
+       editProfileBtn = document.querySelector('.editProfileButton');
+       editProfileBtn.innerText = profile_type;
+
+
+        first_name_sp = document.getElementById('first_name_sp')
+        first_name_sp.style.display = sp_displays;
+        last_name_sp = document.getElementById('last_name_sp');
+        last_name_sp.style.display = sp_displays;
+        combined_name_el = document.getElementById('combined_name');
+        combined_name_el.innerText = combined_name;
+
+        first_ta = document.getElementById('first_name_ta');
+        first_ta.style.display = ta_displays;
+        last_ta = document.getElementById('last_name_ta');
+        last_ta.style.display = ta_displays;
+
+        // This event listener will update the combined_name state variable
+        function updateCombinedName() {
+                console.log("Updating combined name...");
+                const firstName = first_ta.value;
+                const lastName = last_ta.value;
+                combined_name_el.innerText = `Hello ${firstName} ${lastName}!`;
+                // Also update the span elements
+                first_name_sp.innerText = firstName;
+                last_name_sp.innerText = lastName;
+            };        
+        first_ta.addEventListener('input', updateCombinedName);
+        last_ta.addEventListener('input', updateCombinedName);
+        
+        // This Event Listener will update the UI
+        // i.e update the state variables isEditProfile and display 
+        editProfileBtn.onclick = function() {
+            if (isEditProfile) {
+                ta_displays = "none";
+                sp_displays = "inline";
+                profile_type = "Edit Profile";
+            } else {
+                ta_displays = "inline";
+                sp_displays = "none";
+                profile_type = "Save Profile";
+                
+            }
+            editProfileBtn.innerText = profile_type;
+            first_ta.style.display = ta_displays;
+            last_ta.style.display = ta_displays;
+            first_name_sp.style.display = sp_displays;
+            last_name_sp.style.display = sp_displays;
+            // Change the name of Edit Profile button to Save Profile
+            isEditProfile = !isEditProfile;
+        }
+    </script>
+</html>

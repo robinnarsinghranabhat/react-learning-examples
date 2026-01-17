@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="root"></div>
+</body>
+<!-- This setup is not suitable for production. -->
+<!-- Only use it in development! -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react?dev",
+    "react-dom/client": "https://esm.sh/react-dom/client?dev"
+  }
+}
+</script>
+<script type="text/babel" data-type="module">
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+import { useState } from 'react';
+
+let App = function EditProfile() {
+  const [viewName, setViewName] = useState('Save Profile');
+  const [editDisplay, setEditDisplay] = useState(1);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  // Don't do this .. 
+  // const [fullName, setFullName] = useState("");
+  // function handleFirstInputChange(e) {
+  //   setFirstName(e.target.value);
+  //   setFullName(firstName + " " + lastName);
+  // }
+  // Use this Instead, since it's a derived state
+  // Everytime setters are ran, Components render
+  // So, fullName will be updated
+  const fullName = `${firstName} ${lastName}`.trim();
+  function handleFirstInputChange(e) {
+    setFirstName(e.target.value);
+    
+  }
+  function handleSecondInputChange(e) {
+    setLastName(e.target.value);
+  }
+
+  function btnClick (e){
+    e.preventDefault();   // ⬅️ stop form submission and page reload ? 
+    setEditDisplay(!editDisplay);
+    if (editDisplay){
+      setViewName("Edit Profile");
+    } else {
+      setViewName("Save Profile");
+    }
+    
+  }
+  
+  
+  return (
+    <form>
+      <label >
+        First name:{' '}
+        {editDisplay ? (
+        <input 
+          value={firstName}
+          onChange={handleFirstInputChange}
+          />
+      ) : ( <b>{firstName}</b> )
+        }
+      </label>
+      <label>
+        Last name:{' '}
+        {editDisplay ? (
+        <input 
+          value={lastName}
+          onChange={handleSecondInputChange}
+          />
+      ) : ( <b>{lastName}</b> )
+        }
+      </label>
+      
+      <button type="submit" onClick={btnClick}>
+        {viewName}
+      </button>
+      
+      <p><i>{fullName}</i></p>
+    </form>
+  );
+}
+
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+</script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+h4 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+h5 {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+h6 {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+label { display: block; margin-bottom: 20px; }
+
+</style>
+</html>
