@@ -36,8 +36,9 @@ let App = function EditProfile() {
   // setFirstName will trigger to it's state value to "a". This shows up in input field in next render (looks immediate)
   // setFullName will be triggered as well. fullName will update to ""+lastName. NOT "a"+lastName !
   // And this will be show in that next render as well.
-  // react batches all renders in same handler. 
-  // Because
+
+  // OR you can do : setFullName(e.target.value + " " + lastName); ### :)
+  // https://react.dev/learn/choosing-the-state-structure#avoid-redundant-state
   
   // const [fullName, setFullName] = useState("");
   // function handleFirstInputChange(e) {
